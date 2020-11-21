@@ -50,8 +50,13 @@ def getPredictions(games, data):
     a value and the team with the higher value. The higher the value, the better choice for the week"""
     predictions = []
     for game in games:
-        score = (float(data[game[0]]) - float(data[game[1]]))
-        if score > 0:
+        try:
+            score = (float(data[game[0]]) - float(data[game[1]]))
+        except:
+            score = 12345
+        if score == 12345:
+            pass
+        elif score > 0:
             predictions.append((score, game[0]))
         elif score < 0:
             predictions.append((abs(score), game[1]))
